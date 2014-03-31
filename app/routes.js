@@ -5,12 +5,9 @@ module.exports = function(app, passport) {
     res.render('index.ejs'); // load the index.ejs file
   });
 
-  // =====================================
   // LOGIN ===============================
-  // =====================================
   // show the login form
   app.get('/login', function(req, res) {
-
     // render the page and pass in any flash data if it exists
     res.render('login.ejs', { message: req.flash('loginMessage') });
   });
@@ -22,12 +19,9 @@ module.exports = function(app, passport) {
     failureFlash : true // allow flash messages
   }));
 
-  // =====================================
   // SIGNUP ==============================
-  // =====================================
   // show the signup form
   app.get('/signup', function(req, res) {
-
     // render the page and pass in any flash data if it exists
     res.render('signup.ejs', { message: req.flash('signupMessage') });
   });
@@ -39,9 +33,7 @@ module.exports = function(app, passport) {
     failureFlash : true // allow flash messages
   }));
 
-  // =====================================
   // PROFILE SECTION =====================
-  // =====================================
   // we will want this protected so you have to be logged in to visit
   // we will use route middleware to verify this (the isLoggedIn function)
   app.get('/profile', isLoggedIn, function(req, res) {
@@ -50,17 +42,13 @@ module.exports = function(app, passport) {
     });
   });
 
-  // =====================================
   // LOGOUT ==============================
-  // =====================================
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
   });
 
-  // =====================================
   // FACEBOOK ROUTES =====================
-  // =====================================
   // route for facebook authentication and login
   app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
@@ -81,7 +69,6 @@ module.exports = function(app, passport) {
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
-
   // if user is authenticated in the session, carry on
   if (req.isAuthenticated())
     return next();
